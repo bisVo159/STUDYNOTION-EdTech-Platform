@@ -1,0 +1,25 @@
+1. npm init -y
+2. npm i express
+3. npm i nodemon
+4. npm i dotenv
+5. npm i mongoose
+6. npm i cookie-parser
+7. npm i jsonwebtoken
+8. npm i nodemailer
+9. npm i otp-generator
+10. npm i bcrypt
+11. npm i cloudinary
+12. npm i razorpay
+13. npm i cors
+14. npm i express-fileupload
+
+Frontend
+1. npm i concurrently - > to start Frontend backend together
+    "server": "cd server && npm run dev",
+    "dev": "concurrently -n \"client,server\" -c \"bgBlue,bgYellow\" \"npm start\" \"npm run server\""    add in config file
+2. npm i react-router-dom
+3. npm i react-icons
+4. npm install react-type-animation
+5. npm install @reduxjs/toolkit react-redux
+6. npm i react-hot-toast
+https://www.figma.com/file/Mikd0FjHKAofUlWQSi70nf/StudyNotion_shared
