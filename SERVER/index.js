@@ -2,7 +2,7 @@ const express=require('express')
 const app=express()
 
 const userRoutes=require('./routes/User')
-const profuleRoutes=require('./routes/Profile')
+const profileRoutes=require('./routes/Profile')
 const paymentRoutes=require('./routes/Payments')
 const courseRoutes=require('./routes/Course')
 
@@ -35,7 +35,7 @@ cloudinaryConnect();
 
 // routes
 app.use("/api/vi/auth",userRoutes)
-app.use("/api/vi/profile",profuleRoutes)
+app.use("/api/vi/profile",profileRoutes)
 app.use("/api/vi/course",courseRoutes)
 app.use("/api/vi/payment",paymentRoutes)
 

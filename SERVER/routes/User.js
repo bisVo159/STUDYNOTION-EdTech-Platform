@@ -6,7 +6,7 @@ const router = express.Router()
 const {
   logIn,
   signUp,
-  sendOTP,
+  sendOtp,
   changePassword,
 } = require("../controllers/Auth")
 const {
@@ -29,7 +29,7 @@ router.post("/login", logIn)
 router.post("/signup", signUp)
 
 // Route for sending OTP to the user's email
-router.post("/sendotp", sendOTP)
+router.post("/sendotp", sendOtp)
 
 // Route for Changing the password
 router.post("/changepassword", auth, changePassword)

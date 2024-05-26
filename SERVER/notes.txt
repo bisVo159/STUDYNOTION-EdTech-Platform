@@ -22,4 +22,6 @@ Frontend
 4. npm install react-type-animation
 5. npm install @reduxjs/toolkit react-redux
 6. npm i react-hot-toast
+7. npm i axios
+8. npm i react-otp-input
 https://www.figma.com/file/Mikd0FjHKAofUlWQSi70nf/StudyNotion_shared
