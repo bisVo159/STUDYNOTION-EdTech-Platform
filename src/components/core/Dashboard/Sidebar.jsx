@@ -15,7 +15,9 @@ function Sidebar() {
     const[confirmationModal,setConfirmationModal]=useState(null)
 
     if(authLoading||profileLoading){
-        return <div className='spinner w-full flex items-center justify-center'></div>
+        return <div className='grid h-[calc(100vh-3.5rem)] min-w-[220px] items-center border-r-[1px] border-r-richblack-700 bg-richblack-800'>
+                        <div className="spinner"></div>
+                      </div>
     }
   return (
     <div>
@@ -30,7 +32,7 @@ function Sidebar() {
                 }
             </div>
 
-            <div className='mx-auto my-6 h-[1px] w-11/12 backdrop-opacity-600'></div>
+            <div className='mx-auto my-6 h-[1px] w-11/12 bg-richblack-700'></div>
             <div className='flex flex-col'>
                 <SidebarLink
                   link={{name:"settings",path:"dashboard/settings",icon:"VscSettingsGear"}}
@@ -48,7 +50,7 @@ function Sidebar() {
                       className='text-sm font-medium text-richblack-300 px-8 py-2'
                       >
                         <div className='flex items-center gap-x-2'>
-                          <VscSignOut/>
+                          <VscSignOut className='text-lg'/>
                           <span>Logout</span>
                         </div>
                 </button>

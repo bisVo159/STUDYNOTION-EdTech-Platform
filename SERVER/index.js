@@ -5,6 +5,7 @@ const userRoutes=require('./routes/User')
 const profileRoutes=require('./routes/Profile')
 const paymentRoutes=require('./routes/Payments')
 const courseRoutes=require('./routes/Course')
+const contactUsRoute=require('./routes/Contact')
 
 const database=require('./config/database')
 const cookieParser = require('cookie-parser')
@@ -38,6 +39,7 @@ app.use("/api/vi/auth",userRoutes)
 app.use("/api/vi/profile",profileRoutes)
 app.use("/api/vi/course",courseRoutes)
 app.use("/api/vi/payment",paymentRoutes)
+app.use("/api/v1/reach", contactUsRoute);
 
 // default route
 app.get("/",(req,res)=>{

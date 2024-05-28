@@ -46,34 +46,39 @@ const LearningGridArray = [
 
 function LearningGrid() {
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-4 w-[90%] mx-auto'>
+    <div className='grid mx-auto w-[350px] xl:w-fit grid-cols-1 xl:grid-cols-4 mb-12'>
         {
             LearningGridArray.map((card)=>{
                 return (
                     <div key={card.order}
-                    className={`${card.order<0&&"col-span-2"}
+                    className={`${card.order<0&&"xl:col-span-2 xl:h-[294px]"}
                     ${
-                        card.order%2===1?"bg-richblack-700":"bg-richblack-800"
+                        card.order%2===1?"bg-richblack-700 h-[294px]"
+                        : card.order % 2 === 0
+                        ? "bg-richblack-800 h-[294px]"
+                        : "bg-transparent"
                     }
                     ${
-                        card.order===3&&"lg:col-start-2"
-                    } lg:h-[250px]
-                    `}>
+                        card.order===3&&"xl:col-start-2"
+                    }`}>
                         {
                             card.order<0?(
-                                <div className='h-full flex flex-col items-start gap-6 p-6 bg-richblue-900'>
+                                <div className='xl:w-[90%] flex flex-col gap-3 pb-10 xl:pb-0'>
                                     <div className='text-4xl font-semibold'>
                                         { card.heading}{" "}
                                         <HighLightText text={card.highlightText}/>
                                     </div>
-                                    <p className='w-fit'>{card.description}</p>
+                                    <p className='text-richblack-300 font-medium'>{card.description}</p>
+
+                                    <div className="w-fit mt-2">
                                     <CTAButton active={true} linkto={card.BtnLink} children={card.BtnText}/>
+                                    </div>
                                 </div>
                             )
                             :(
-                                <div className=' h-full flex flex-col  items-start gap-6 p-6'>
-                                    <h1 className='text-richblue-5 text-lg'>{card.heading}</h1>
-                                    <p className='text-richblue-300 font-medium'>{card.description}</p>
+                                <div className=' p-8 flex flex-col gap-8'>
+                                    <h1 className='text-richblack-5 text-lg'>{card.heading}</h1>
+                                    <p className='text-richblack-300 font-medium'>{card.description}</p>
                                 </div>
                             )
                         }

@@ -4,13 +4,13 @@ import ContactUsForm from '../../ContactPage/ContactUsForm'
 function ContactFormSection() {
 
   return (
-    <div className='mx-auto my-10 flex flex-col items-center'>
-        <div className='flex flex-col items-center'>
-            <h1 className='text-4xl font-semibold'>Get  in Touch</h1>
-            <p>We'd love to here for you, Please fill out this form</p>
-        </div>
+    <div className='mx-auto'>
+          <h1 className='text-center text-4xl font-semibold'>Get  in Touch</h1>
+          <p className='text-center text-richblack-300 mt-3'>We&apos;d love to here for you, Please fill out this form.</p>
 
-        <ContactUsForm/>
+        <div className="mt-12 mx-auto">
+        <ContactUsForm />
+      </div>
     </div>
   )
 }

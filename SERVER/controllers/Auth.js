@@ -186,6 +186,8 @@ exports.logIn = async (req, res) => {
 				}
 			);
 
+			console.log("log in ",token);
+
 			// Save token to user document in database
 			user.token = token;
 			user.password = undefined;

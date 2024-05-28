@@ -6,9 +6,9 @@ import { useSelector } from "react-redux";
 import { ACCOUNT_TYPE } from "../../utils/constants";
 import { CiShoppingCart } from "react-icons/ci";
 import ProfileDropDown from "../core/Auth/ProfileDropDown";
-import { useState } from "react";
-import { apiConnector } from "../../services/apiconnector";
-import { categories } from "../../services/apis";
+// import { useState } from "react";
+// import { apiConnector } from "../../services/apiconnector";
+// import { categories } from "../../services/apis";
 import { IoIosArrowDown } from "react-icons/io";
 
 const subLinks=[
