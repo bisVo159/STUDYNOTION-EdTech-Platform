@@ -8,13 +8,19 @@ const {uploadImageToCloudinary}=require('../utils/imageUploader')
 exports.createCourse=async(req,res)=>{
     try {
         // fetch data
-        let {courseName,courseDescription,whatWillYouLearn,price,tag,category,status}=req.body;
+        let {courseName,courseDescription,whatWillYouLearn,price,
+            // tag,
+            category,status,instructions}=req.body;
 
         // get thumbnail
-        const thumbnail=req.files.thumbnailImage
+        // const thumbnail=req.files.thumbnailImage
 
         // validation
-        if(!courseName||!courseDescription||!whatWillYouLearn||!price||!category||!thumbnail){
+        if(!courseName||!courseDescription||!whatWillYouLearn
+            ||!price||!category
+            // ||tag
+            // ||!thumbnail
+        ){
             return res.status(400).json({
                 success:false,
                 message:"All fields are required"
@@ -47,7 +53,7 @@ exports.createCourse=async(req,res)=>{
         }
 
         // upload image to cloudinary
-        const thumbnailImage=await uploadImageToCloudinary(thumbnail,process.env.FOLDER_NAME)
+        // const thumbnailImage=await uploadImageToCloudinary(thumbnail,process.env.FOLDER_NAME)
 
         // create an entry  for new course
         const newCourse=await Course.create({
@@ -56,9 +62,11 @@ exports.createCourse=async(req,res)=>{
             Instructor:instructorDetails._id,
             whatWillYouLearn,
             price,
+            // tag,
             category:categoryDetails._id,
-            thumbnail:thumbnailImage.secure_url,
-            status:status
+            // thumbnail:thumbnailImage.secure_url,
+            status:status,
+            instructions
         })
 
         // add the new course to the user schema of instructor

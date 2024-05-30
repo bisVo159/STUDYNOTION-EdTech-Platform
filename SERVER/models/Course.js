@@ -51,7 +51,7 @@ const courseSchema=new mongoose.Schema({
             ref:"User"
         }
     ],
-    instructors:{
+    instructions:{
         type:[String]
     },
     status:{

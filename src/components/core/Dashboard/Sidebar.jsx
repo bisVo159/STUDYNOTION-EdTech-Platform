@@ -35,7 +35,7 @@ function Sidebar() {
             <div className='mx-auto my-6 h-[1px] w-11/12 bg-richblack-700'></div>
             <div className='flex flex-col'>
                 <SidebarLink
-                  link={{name:"settings",path:"dashboard/settings",icon:"VscSettingsGear"}}
+                  link={{name:"settings",path:"/dashboard/settings",icon:"VscSettingsGear"}}
                 />
 
                 <button
