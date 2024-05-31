@@ -26,4 +26,6 @@ Frontend
 8. npm i react-otp-input
 9. npm i @ramonak/react-progress-bar
 10. npm i react-rating-stars-component
+11. npm i video-react
+12. npm i react-dropzone
 https://www.figma.com/file/Mikd0FjHKAofUlWQSi70nf/StudyNotion_shared

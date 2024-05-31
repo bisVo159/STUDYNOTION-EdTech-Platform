@@ -7,6 +7,8 @@ import RequirementField from './RequirementField';
 import IconBtn from "../../../../common/IconBtn"
 import toast from 'react-hot-toast';
 import {COURSE_STATUS} from "../../../../../utils/constants"
+import ChipInput from "./ChipInput"
+import Upload from '../Upload';
 
 function CourseInformationForm() {
     const {
@@ -51,11 +53,11 @@ function CourseInformationForm() {
       if(currentValues.courseTitle!==course.courseName
         ||currentValues.courseShortDesc!==course.courseDescription
         ||currentValues.coursePrice!==course.price
-        // ||currentValues.courseTags.toString()!==course.tag.toString()
+        ||currentValues.courseTags.toString()!==course.tag.toString()
         ||currentValues.courseBenefits!==course.whatWillYouLearn
         ||currentValues.courseCategory._id!==course.category._id
         ||currentValues.courseRequirements.toString()!==course.instructions.toString()
-        // ||currentValues.courseImage!==course.thumbnail
+        ||currentValues.courseImage!==course.thumbnail
       ){
         return true
       }
@@ -78,14 +80,26 @@ function CourseInformationForm() {
               if(currentValues.coursePrice!==course.price){
                 formData.append("price",data.coursePrice);
               }
+              if (currentValues.courseTags.toString() !== course.tag.toString()) {
+                formData.append("tag", JSON.stringify(data.courseTags))
+              }
               if(currentValues.courseBenefits!==course.whatWillYouLearn){
                 formData.append("whatWillYouLearn",data.courseBenefits);
               }
               if(currentValues.courseCategory._id!==course.category._id){
                 formData.append("category",data.courseCategory);
               }
-              if(currentValues.courseRequirements.toString()!==course.instructions.toString()){
-                formData.append("instructions",JSON.stringify(data.courseCategory));
+              if (
+                currentValues.courseRequirements.toString() !==
+                course.instructions.toString()
+              ) {
+                formData.append(
+                  "instructions",
+                  JSON.stringify(data.courseRequirements)
+                )
+              }
+              if (currentValues.courseImage !== course.thumbnail) {
+                formData.append("thumbnailImage", data.courseImage)
               }
     
               setLoading(true)
@@ -105,9 +119,11 @@ function CourseInformationForm() {
         formData.append("courseName",data.courseTitle);
         formData.append("courseDescription",data.courseShortDesc);
         formData.append("price",data.coursePrice);
+        formData.append("tag", JSON.stringify(data.courseTags))
         formData.append("whatWillYouLearn",data.courseBenefits);
         formData.append("category",data.courseCategory);
-        formData.append("instructions",JSON.stringify(data.courseCategory));
+        formData.append("instructions", JSON.stringify(data.courseRequirements))
+        formData.append("thumbnailImage", data.courseImage)
         formData.append("status",COURSE_STATUS.DRAFT)
 
         setLoading(true)
@@ -123,12 +139,12 @@ function CourseInformationForm() {
   return (
     <form
     onSubmit={handleSubmit(onSubmit)}
-    className='rounded-md border-richblack-700 bg-richblack-800 p-6 space-y-8 '
+    className='space-y-8 rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-6 '
     >
-        <div>
+        <div className='flex flex-col space-y-2'>
           <label 
           htmlFor='courseTitle'
-          className='lable-style'>Course Title<sup>*</sup></label>
+          className='lable-style'>Course Title<sup className='text-pink-200'>*</sup></label>
           <input
           id='courseTitle'
           placeholder='Enter Course Title'
@@ -136,54 +152,59 @@ function CourseInformationForm() {
           className='form-style w-full'
           />
           {
-            errors.courseTitle&&<span className='lable-style'>Course Title is required</span>
+            errors.courseTitle&&<span className='ml-2 text-xs tracking-wide text-pink-200'>Course Title is required</span>
           }
         </div>
 
-        <div>
+        <div className='flex flex-col space-y-2'>
           <label
           htmlFor='courseShortDesc'
-           className='lable-style'>Course Short Description<sup>*</sup></label>
+           className='lable-style'>Course Short Description<sup className='text-pink-200'>*</sup></label>
           <textarea
           id='courseShortDesc'
           placeholder='Enter Description'
           {...register("courseShortDesc",{required:true})}
-          className='form-style min-h-[140px] w-full'
+          className='form-style resize-x-none min-h-[130px] w-full'
           />
           {
-            errors.courseShortDesc&&<span className='lable-style'>Course Description is required</span>
+            errors.courseShortDesc&&<span className='ml-2 text-xs tracking-wide text-pink-200'>Course Description is required</span>
           }
         </div>
 
-        <div className='relative'>
+        <div className='flex flex-col space-y-2'>
           <label 
           htmlFor='coursePrice'
-          className='lable-style'>Course Price<sup>*</sup></label>
-          <input
-          id='coursePrice'
-          placeholder='Enter Price'
-          {...register("coursePrice",{
-            required:true,
-            valueAsNumber:true,
-          })}
-          className='form-style w-full'
-          />
-          <HiOutlineCurrencyRupee className='absolute left-2 top-1/2'
-          />
+          className='lable-style'>Course Price<sup className='text-pink-200'>*</sup></label>
+          <div className='relative'>
+              <input
+              id='coursePrice'
+              placeholder='Enter Course Price'
+              {...register("coursePrice", {
+                required: true,
+                valueAsNumber: true,
+                pattern: {
+                  value: /^(0|[1-9]\d*)(\.\d+)?$/,
+                },
+              })}
+              className='form-style w-full !pl-12'
+              />
+              <HiOutlineCurrencyRupee className='absolute left-3 top-1/2 inline-block -translate-y-1/2 text-2xl text-richblack-400'
+              />
+          </div>
           {
-            errors.coursePrice&&<span className='lable-style'>Course Price is required</span>
+            errors.coursePrice&&<span className='ml-2 text-xs tracking-wide text-pink-200'>Course Price is required</span>
           }
         </div>
 
-        <div>
+        <div className='flex flex-col space-y-2'>
           <label
           htmlFor='courseCategory'
-           className='lable-style'>Course Category<sup>*</sup></label>
+           className='lable-style'>Course Category<sup className='text-pink-200'>*</sup></label>
           <select
           id='courseCategory'
           defaultValue=""
           {...register("courseCategory",{required:true})}
-          className='bg-richblack-600 '
+          className='form-style w-full '
           >
             <option value="" disabled>Choose a Category</option>
 
@@ -198,40 +219,41 @@ function CourseInformationForm() {
               ))
             }
           </select>
-          {errors.courseCategory&&<span className='lable-style'>Category is required</span>}
+          {errors.courseCategory&&<span className='ml-2 text-xs tracking-wide text-pink-200'>Category is required</span>}
         </div>
 
         {/* create a custom component for tags */}
-        {/* <ChipInput
+        <ChipInput
         label="Tags"
         name="courseTag"
-        placeholder="Enter tags and press enter"
+        placeholder="Enter Tags and press Enter"
         register={register}
         errors={errors}
         setValue={setValue}
         getValues={getValues}
-        /> */}
+        />
 
         {/* create a component for uploading and showing preview of media */}
-        {/* <Upload
-        label="Tags"
-        name="courseTag"
-        placeholder="Enter tags and press enter"
+        <Upload
+        name="courseImage"
+        label="Course Thumbnail"
         register={register}
-        errors={errors}
         setValue={setValue}
-        /> */}
+        errors={errors}
+        editData={editCourse ? course?.thumbnail : null}
+      />
 
         {/* Benefits of the course */}
-        <div>
-          <label className='lable-style'>Benefits of the course<sup>*</sup></label>
+        <div className='flex flex-col space-y-2'>
+          <label className='lable-style' htmlFor='courseBenefits'>Benefits of the course<sup>*</sup></label>
           <textarea
           id='courseBenefits'
           placeholder='Enter benefits of the course'
           {...register('courseBenefits',{required:true})}
-          className='form-style min-h-[130px] w-full'
+          className='form-style resize-x-none min-h-[130px] w-full'
           />
-          {errors.courseBenefits&&<span>Benefits of the course are required</span>}
+          {errors.courseBenefits&&
+          (<span className='ml-2 text-xs tracking-wide text-pink-200'>Benefits of the course are required</span>)}
         </div>
 
         <RequirementField
@@ -243,12 +265,13 @@ function CourseInformationForm() {
           getValues={getValues}
         />
         
-        <div>
+        <div className='flex justify-end gap-x-2'>
           {
             editCourse&&(
               <button
               onClick={dispatch(setStep(2))}
-              className='flex items-center gap-x-2 bg-richblack-300'
+              disabled={loading}
+              className='flex cursor-pointer items-center gap-x-2 rounded-md bg-richblack-300 py-[8px] px-[20px] font-semibold text-richblack-900'
               >
                 Continue Without Saving
               </button>

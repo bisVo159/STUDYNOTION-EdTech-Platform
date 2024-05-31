@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
 function RequirementField({name,label,register,errors,setValue,getValues}) {
     const[requirement,setRequirement]=useState("")
     const[requirementList,setRequiremenList]=useState([])
+    const {course,editCourse}=useSelector(state=>state.course)
 
-    useEffect(()=>{
-        register(name,{
-            required:true,
-            // validate:(value)=>value.length>0
-        })
-    },[])
+    useEffect(() => {
+        if (editCourse) {
+            setRequiremenList(course?.instructions)
+        }
+        register(name, { required: true, validate: (value) => value.length > 0 })
+      }, [])
 
     useEffect(()=>{
         setValue(name,requirementList)
@@ -27,9 +29,9 @@ function RequirementField({name,label,register,errors,setValue,getValues}) {
         setRequiremenList(updatedRequirementList)
     }
   return (
-    <div>
+    <div className='flex flex-col space-y-2'>
         <div>
-            <label htmlFor={name} className='lable-style'>{label}<sup>*</sup></label>
+            <label htmlFor={name} className='lable-style'>{label}<sup className='text-pink-200'>*</sup></label>
             <input
                 type='text'
                 id={name}
@@ -48,7 +50,7 @@ function RequirementField({name,label,register,errors,setValue,getValues}) {
 
         {
             requirementList.length>0&&(
-                <ul>
+                <ul className='mt-2 list-inside list-disc'>
                     {
                         requirementList.map((requirement,index)=>(
                             <li key={index} className='flex items-center text-richblack-5 gap-2'>
@@ -56,7 +58,7 @@ function RequirementField({name,label,register,errors,setValue,getValues}) {
                                 <button
                                 type='button'
                                 onClick={()=>handleRemoveRequirement(index)}
-                                className='text-xs text-pure-greys-300'
+                                className=' ml-2text-xs text-pure-greys-300'
                                 >clear</button>
                             </li>
                         ))
@@ -64,10 +66,11 @@ function RequirementField({name,label,register,errors,setValue,getValues}) {
                 </ul>
             )
         }
-
-        {
-            errors[name]&&(<span className='lable-style'>{label} is required</span>)
-        }
+      {errors[name] && (
+        <span className="ml-2 text-xs tracking-wide text-pink-200">
+          {label} is required
+        </span>
+      )}
     </div>
   )
 }
