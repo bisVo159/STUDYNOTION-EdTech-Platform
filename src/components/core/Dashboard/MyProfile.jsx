@@ -27,7 +27,7 @@ function MyProfile() {
 
             <IconBtn
             text={"Edit"}
-            onclick={()=>navigate("dashboard/settings")}
+            onclick={()=>navigate("/dashboard/settings")}
             children={<RiEditBoxLine />}
             />
         </div>
@@ -38,7 +38,7 @@ function MyProfile() {
                 <p className='text-lg font-semibold text-richblack-5'>About</p>
                 <IconBtn
                 text={"Edit"}
-                onclick={()=>navigate("dashboard/settings")}
+                onclick={()=>navigate("/dashboard/settings")}
                 children={<RiEditBoxLine />}
              />
             </div>
@@ -58,7 +58,7 @@ function MyProfile() {
                 <p className='text-lg font-semibold text-richblack-5'>Personal Details</p>
                 <IconBtn
                     text={"Edit"}
-                    onclick={()=>navigate("dashboard/settings")}
+                    onclick={()=>navigate("/dashboard/settings")}
                     children={<RiEditBoxLine />}
                 />
             </div>

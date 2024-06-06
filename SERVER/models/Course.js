@@ -31,7 +31,7 @@ const courseSchema=new mongoose.Schema({
         }
     ],
     price:{
-        type:Number
+        type:Number,
     },
     thumbnail:{
         type:String

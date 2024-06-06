@@ -28,4 +28,6 @@ Frontend
 10. npm i react-rating-stars-component
 11. npm i video-react
 12. npm i react-dropzone
+13. npm i react-super-responsive-table
+14. npm install swiper
 https://www.figma.com/file/Mikd0FjHKAofUlWQSi70nf/StudyNotion_shared
