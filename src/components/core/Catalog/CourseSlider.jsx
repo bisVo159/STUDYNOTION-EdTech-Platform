@@ -4,7 +4,7 @@ import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
 
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, Pagination, FreeMode } from 'swiper/modules';
 import CourseCard from './CourseCard'
 
 export default function CourseSlider({courses}) {
@@ -14,32 +14,15 @@ export default function CourseSlider({courses}) {
             courses?.length?(
                 <Swiper
                 slidesPerView={1}
-                spaceBetween={30}
-                centeredSlides={true}
-                autoplay={{
-                  delay: 2500,
-                  disableOnInteraction: false,
-                }}
-                pagination={{
-                  clickable: true,
-                }}
-                navigation={true}
-                modules={[Autoplay, Pagination, Navigation]}
-                className="mySwiper"
+                spaceBetween={25}
+                loop={true}
+                modules={[FreeMode, Pagination]}
                 breakpoints={{
-                    640: {
-                      slidesPerView: 2,
-                      spaceBetween: 20,
-                    },
-                    768: {
-                      slidesPerView: 4,
-                      spaceBetween: 40,
-                    },
-                    1024: {
-                      slidesPerView: 5,
-                      spaceBetween: 50,
-                    },
-                  }}
+                  1024: {
+                    slidesPerView: 3,
+                  },
+                }}
+                className="max-h-[30rem]"
                 >
                     {
                         courses.map((course)=>(
@@ -50,7 +33,7 @@ export default function CourseSlider({courses}) {
                     }
                 </Swiper>
             ):
-            ( <p>No Courses Found</p> )
+            ( <p className='text-xl text-richblack-5'>No Courses Found</p> )
         }
     </>
   )

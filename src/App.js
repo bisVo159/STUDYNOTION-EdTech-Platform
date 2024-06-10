@@ -23,6 +23,7 @@ import Settings from "./components/core/Dashboard/Settings";
 import MyCourses from "./components/core/Dashboard/MyCourses";
 import EditCourse from "./components/core/Dashboard/EditCourse";
 import Catalog from "./pages/Catalog";
+import CourseDetails from "./pages/CourseDetails";
 
 function App() {
   const {user}=useSelector(state=>state.profile)
@@ -83,7 +84,7 @@ function App() {
                   user?.accountType===ACCOUNT_TYPE.STUDENT&&(
                     <>
                       <Route path="enrolled-courses" element={<EnrolledCourses/>}/>
-                      <Route path="cart" element={<Cart/>}/>
+                      <Route path="purchase-history" element={<Cart/>}/>
                     </>
                   )
                 }
@@ -100,6 +101,7 @@ function App() {
               </Route>
 
               <Route path='catalog/:catalogName' element={<Catalog/>}/>
+              <Route path='courses/:courseId' element={<CourseDetails/>}/>
 
               <Route
               path="*"

@@ -39,7 +39,7 @@ app.use("/api/vi/auth",userRoutes)
 app.use("/api/vi/profile",profileRoutes)
 app.use("/api/vi/course",courseRoutes)
 app.use("/api/vi/payment",paymentRoutes)
-app.use("/api/v1/reach", contactUsRoute);
+app.use("/api/vi/reach", contactUsRoute);
 
 // default route
 app.get("/",(req,res)=>{

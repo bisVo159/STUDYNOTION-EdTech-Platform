@@ -242,53 +242,59 @@ exports.showAllCourses=async(req,res)=>{
 
 
 // getCourseDetails
-exports.getCourseDetails=async(req,res)=>{
-    try {
-        // get id
-        const {courseId}=req.body
-        // find course details
-        const coursedetails=await Course.find({_id:courseId})
-                                                        .populate(
-                                                            {
-                                                                path:'Instructor',
-                                                                populate:{
-                                                                    path:'additionalDetails'
-                                                                }
-                                                            }
-                                                        )
-                                                        .populate(
-                                                            {
-                                                                path:'courseContent',
-                                                                populate:{
-                                                                    path:'subSection'
-                                                                }
-                                                            }
-                                                        )
-                                                        .populate('ratingAndReviews')
-                                                        .populate('category')
-                                                        .exec()
+exports.getCourseDetails = async (req, res) => {
+  try {
+    const { courseId } = req.body
+    const courseDetails = await Course.findOne({
+      _id: courseId,
+    })
+      .populate({
+        path: "Instructor",
+        populate: {
+          path: "additionalDetails",
+        },
+      })
+      .populate("category")
+      .populate("ratingAndReviews")
+      .populate({
+        path: "courseContent",
+        populate: {
+          path: "subSection",
+          select: "-videoUrl",
+        },
+      })
+      .exec()
 
-        // validation
-        if(!coursedetails){
-            return res.status(400).json({
-                success:false,
-                message:`Could not find any course with courseId ${courseId}`
-            })
-        }
-
-        // return response
-        return res.status(200).json({
-            success:true,
-            message:'Course details fetched successfully',
-            data:coursedetails
-        })
-    } catch (error) {
-        console.log(error)
-        return res.status(500).json({
-            success:false,
-            message:error.message
-        })
+    if (!courseDetails) {
+      return res.status(400).json({
+        success: false,
+        message: `Could not find course with id: ${courseId}`,
+      })
     }
+
+    let totalDurationInSeconds = 0
+    courseDetails.courseContent.forEach((content) => {
+      content.subSection.forEach((subSection) => {
+        const timeDurationInSeconds = parseInt(subSection.timeDuration)
+        totalDurationInSeconds += timeDurationInSeconds
+      })
+    })
+
+    const totalDuration = convertSecondsToDuration(totalDurationInSeconds)
+
+    return res.status(200).json({
+      success: true,
+      data: {
+        courseDetails,
+        totalDuration,
+      },
+    })
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    })
+  }
 }
 
 
