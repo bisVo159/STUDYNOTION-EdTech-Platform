@@ -60,7 +60,7 @@ router.delete("/deleteCourse", auth, isInstructor, deleteCourse)
 // get instructor course details
 router.get("/getInstructorCourses", auth, isInstructor, getInstructorCourses)
 // get instructor course details
-router.post("/getFullCourseDetails", auth, isInstructor, getFullCourseDetails)
+router.post("/getFullCourseDetails", auth, isStudent, getFullCourseDetails)
 
 //Add a Section to a Course
 router.post("/addSection", auth, isInstructor, createSection)

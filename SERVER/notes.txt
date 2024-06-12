@@ -31,4 +31,6 @@ Frontend
 13. npm i react-super-responsive-table
 14. npm install swiper
 15. npm i react-copy-to-clipboard
+16. npm i react-rating-stars-component
+17. npm i video-react
 https://www.figma.com/file/Mikd0FjHKAofUlWQSi70nf/StudyNotion_shared
