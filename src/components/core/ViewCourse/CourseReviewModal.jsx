@@ -31,7 +31,7 @@ function CourseReviewModal({setReviewModal}) {
             courseId:courseEntireData._id,
             rating:data.courseRating,
             review:data.courseExperience
-        })
+        },token)
 
         setReviewModal(false)
     }

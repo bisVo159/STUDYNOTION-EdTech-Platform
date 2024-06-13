@@ -33,4 +33,5 @@ Frontend
 15. npm i react-copy-to-clipboard
 16. npm i react-rating-stars-component
 17. npm i video-react
+18. npm i react-chartjs-2
 https://www.figma.com/file/Mikd0FjHKAofUlWQSi70nf/StudyNotion_shared

@@ -44,6 +44,8 @@ const {
   getAllRating,
 } = require("../controllers/RatingAndReview")
 
+const {updateCourseProgress}=require("../controllers/CourseProgress")
+
 // Importing Middlewares
 const { auth, isStudent, isInstructor, isAdmin } = require("../middleware/auth")
 
@@ -95,4 +97,6 @@ router.post("/createRating", auth, isStudent, ceateRating)
 router.get("/getAverageRating", getAverageRating)
 router.get("/getReviews", getAllRating)
 
+// Course Progress
+router.post("/updateCourseProgress",auth,isStudent,updateCourseProgress)
 module.exports = router

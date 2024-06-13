@@ -27,13 +27,13 @@ function VideoDetails() {
 
   useEffect(()=>{
     const setVideoSpecificData=async()=>{
-      if(!courseSectionData.length) return
+      if(!courseSectionData?.length) return
 
       if(!courseId||!sectionId||!subSectionId) navigate("/dashboard/enrolled-courses")
 
       else{
         const filteredData=courseSectionData.filter(section=>section._id===sectionId)
-        const filteredVideoData=filteredData?.[0].subSection.filter((data)=>data._id===subSectionId)
+        const filteredVideoData=filteredData?.[0].subSection?.filter((data)=>data._id===subSectionId)
         setVideoData(filteredVideoData?.[0])
         setVideoEnded(false)
       }
@@ -89,7 +89,6 @@ function VideoDetails() {
   }
 
   const handleLectureCompletion=async()=>{
-    // dummy code
     setLoading(true)
 
     const res=await markLectureAsComplete({courseId,subSectionId},token)
@@ -106,6 +105,7 @@ function VideoDetails() {
             aspectRatio='16:9'
             ref={playerRef}
             playsInline
+            autoPlay={true}
             onEnded={()=>setVideoEnded(true)}
             src={videoData.videoUrl}
             >
@@ -126,8 +126,11 @@ function VideoDetails() {
 
                   <IconBtn
                     disabled={loading}
-                    onClick={()=>{
-                      playerRef?.current?.seek(0)
+                    onclick={()=>{
+                      if(playerRef?.current){
+                        playerRef.current.seek(0)
+                        playerRef.current.play()
+                      }
                       setVideoEnded(false)
                     }}
                     text="Rewatch"

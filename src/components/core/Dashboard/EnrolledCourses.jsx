@@ -10,23 +10,6 @@ function EnrolledCourses() {
   const [enrolledCourses,setEnrolledCourses]=useState(null)
   const navigate=useNavigate()
 
-  const totalDuration=(course)=>{
-    let totalSeconds = 0
-    course.courseContent.forEach((content) => {
-      content.subSection.forEach((subSection) => {
-        const timeDurationInSeconds = parseInt(subSection.timeDuration)
-        totalSeconds += timeDurationInSeconds
-      })
-    })
-    const hours = Math.floor(totalSeconds / 3600)
-    const minutes = Math.floor((totalSeconds % 3600) / 60)
-    const seconds = Math.floor((totalSeconds % 3600) % 60)
-  
-    if (hours > 0)  return `${hours}h ${minutes}m`
-    else if (minutes > 0) return `${minutes}m ${seconds}s`
-    else return `${seconds}s`
-  }
-
   const getEnrolledCourses=async()=>{
     try {
       const response=await getUserEnrolledCourses(token)
@@ -91,7 +74,7 @@ function EnrolledCourses() {
                   </div>
 
                   <div className='w-1/4 px-2 py-3'>
-                    {totalDuration(course)}
+                    {course?.totalDuration}
                   </div>
 
                   <div className='flex w-1/5 flex-col gap-2 px-2 py-3'>
