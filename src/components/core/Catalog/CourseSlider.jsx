@@ -4,7 +4,7 @@ import "swiper/css"
 import "swiper/css/free-mode"
 import "swiper/css/pagination"
 
-import { Autoplay, Pagination, FreeMode } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import CourseCard from './CourseCard'
 
 export default function CourseSlider({courses}) {
@@ -16,13 +16,21 @@ export default function CourseSlider({courses}) {
                 slidesPerView={1}
                 spaceBetween={25}
                 loop={true}
-                modules={[FreeMode, Pagination]}
+                autoplay={{
+                  delay: 2500,
+                  disableOnInteraction: false,
+                }}
+                pagination={{
+                  clickable: true,
+                }}
+                navigation={true}
+                modules={[Autoplay,Navigation, Pagination]}
                 breakpoints={{
                   1024: {
                     slidesPerView: 3,
                   },
                 }}
-                className="max-h-[30rem]"
+                className="max-h-[30rem] mySwiper"
                 >
                     {
                         courses.map((course)=>(

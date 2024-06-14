@@ -87,7 +87,7 @@ function App() {
                   user?.accountType===ACCOUNT_TYPE.STUDENT&&(
                     <>
                       <Route path="enrolled-courses" element={<EnrolledCourses/>}/>
-                      <Route path="purchase-history" element={<Cart/>}/>
+                      <Route path="cart" element={<Cart/>}/>
                     </>
                   )
                 }
