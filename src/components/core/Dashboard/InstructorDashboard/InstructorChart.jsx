@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-// import { Chart,registerables } from 'chart.js'
+import { Chart,registerables } from 'chart.js'
 import { Pie } from 'react-chartjs-2'
-// Chart.register(...registerables)
+Chart.register(...registerables)
 
 function InstructorChart({courses}) {
     const[currChart,setCurrChart]=useState("students")
@@ -37,22 +37,37 @@ function InstructorChart({courses}) {
         }
       ]
     }
+    const options = {
+      maintainAspectRatio: false,
+    }
   return (
-    <div>
-      <p>Visualise</p>
-      <div className='flex gap-x-3'>
-        <button onClick={()=>setCurrChart("students")}
-        className={`${currChart==="students"&&"bg-richblack-300 text-black"} p-1 rounded-sm`}
+    <div className='flex flex-1 flex-col gap-y-4 rounded-md bg-richblack-800 p-6'>
+      <p className='text-lg font-bold text-richblack-5'>Visualize</p>
+      <div className='space-x-4 font-semibold'>
+        <button 
+        onClick={()=>setCurrChart("students")}
+        className={`rounded-sm p-1 px-3 transition-all duration-200 ${
+        currChart === "students"
+          ? "bg-richblack-700 text-yellow-50"
+          : "text-yellow-400"
+        }`}
           >
           Students</button>
-        <button onClick={()=>setCurrChart("income")}
-        className={`${currChart==="income"&&"bg-richblack-300 text-black"} p-1 rounded-sm`}
+        <button 
+        onClick={()=>setCurrChart("income")}
+        className={`rounded-sm p-1 px-3 transition-all duration-200 ${
+        currChart === "income"
+          ? "bg-richblack-700 text-yellow-50"
+          : "text-yellow-400"
+        }`}
           >
           Income</button>
       </div>
-      <div className='h-96'>
+      <div className='relative mx-auto aspect-square h-full w-full'>
           <Pie 
-          data={currChart==="students"?CharDataForStudents:CharDataForIncome}/>
+          data={currChart==="students"?CharDataForStudents:CharDataForIncome}
+          options={options}
+          />
       </div>
     </div>
   )
